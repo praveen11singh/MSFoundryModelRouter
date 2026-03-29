@@ -15,19 +15,18 @@ This reference implementation covers six real-world task categories and prints a
 
 ## Architecture
 
-```
-Client (Python)
-    │
-    ▼
-OpenAI SDK  ──►  MODEL_ROUTER_ENDPOINT  (Azure AI Foundry)
-                        │
-                        ├──► GPT-4o          (reasoning / coding)
-                        ├──► GPT-4o-mini     (factual / summarisation)
-                        ├──► GPT-4           (creative writing)
-                        └──► ...             (extensible)
-```
+![Model Router Architecture](./ModelRouter.png)
 
-The router endpoint acts as a **single entry point**. It evaluates prompt characteristics at inference time and routes to the optimal model — no client-side logic required.
+The router endpoint acts as a **single entry point**. It classifies each incoming prompt by task type and token count, then dispatches to the optimal model — no client-side routing logic required.
+
+| Route | Model | When selected |
+|---|---|---|
+| Simple / Reasoning | `o4-mini-2025-04-16` | Factual queries, summarisation, multi-step reasoning — fast & cost-efficient |
+| Complex / Data | `gpt-5-2025-08-07` | Coding, data extraction, high-quality generation |
+| Nano / Creative | `gpt-5-nano-2025-08-07` | Creative writing — lightweight, fast generation |
+| Vision | `gpt-4o (vision)` | Prompts with image + text input |
+
+All routes converge to a **streaming response**, so latency is optimised regardless of which model is selected.
 
 ---
 
@@ -100,33 +99,40 @@ python main.py
 
 [1/6] Simple factual
   User: What is the capital of France?
-  Router → gpt-4o-mini
-  Tokens  prompt=18  completion=5
+  Router → o4-mini-2025-04-16
+  Tokens  prompt=23  completion=26
   Answer: The capital of France is Paris.
 
 [2/6] Reasoning / coding
   User: Implement a thread-safe LRU cache in Python using OrderedDict...
-  Router → gpt-4o
-  Tokens  prompt=42  completion=310
+  Router → gpt-5-2025-08-07
+  Tokens  prompt=44  completion=512
   Answer: import threading...
+
+[3/6] Creative writing
+  User: Write a two-paragraph short story about an astronaut...
+  Router → gpt-5-nano-2025-08-07
+  Tokens  prompt=34  completion=512
+  Answer: The red dust settled around Commander Yara's boots...
 
 ...
 
 ================================================================
   Routing Summary
 ================================================================
-  Task                      Model selected         In    Out
+  Task                      Model selected           In    Out
   ------------------------- -------------------- ------ ------
-  Simple factual            gpt-4o-mini              18      5
-  Reasoning / coding        gpt-4o                   42    310
-  Creative writing          gpt-4o                   28    198
-  Data extraction           gpt-4o-mini              35     42
-  Summarisation             gpt-4o-mini              88     52
-  Multi-step reasoning      gpt-4o                   55    175
+  Simple factual            o4-mini-2025-04-16       23     26
+  Reasoning / coding        gpt-5-2025-08-07         44    512
+  Creative writing          gpt-5-nano-2025-08-07    34    512
+  Data extraction           gpt-5-2025-08-07         44    221
+  Summarisation             o4-mini-2025-04-16       85    202
+  Multi-step reasoning      o4-mini-2025-04-16       64    512
 
   Model distribution:
-    gpt-4o               ███ (3)
-    gpt-4o-mini          ███ (3)
+    o4-mini-2025-04-16    ███ (3)
+    gpt-5-2025-08-07      ██ (2)
+    gpt-5-nano-2025-08-07 █ (1)
 ================================================================
 ```
 
@@ -162,6 +168,7 @@ You do **not** need to implement any of this logic client-side. The router handl
 
 ## Customising Prompts
 
+
 Add your own prompt categories to `DEMO_PROMPTS` in `main.py`:
 
 ```python
@@ -185,6 +192,8 @@ This repo is one of a growing set of production-ready reference implementations:
 | [MSFoundryAgentImageInput](https://github.com/praveen11singh/MSFoundryAgentImageInput) | Multi-modal image input with agents |
 | [MSFoundryEvaluation](https://github.com/praveen11singh/MSFoundryEvaluation) | Agent evaluation with azure-ai-evaluation |
 | [MSFoundryRedTeam](https://github.com/praveen11singh/MSFoundryRedTeam) | Red team jailbreak probing & RAI evaluators |
+| [foundry-langchain](https://github.com/praveen11singh/foundry-langchain) | LangChain & LangGraph integration patterns |
+| [foundry-mcp-agent](https://github.com/praveen11singh/foundry-mcp-agent) | Model Context Protocol (MCP) agent implementation |
 | **MSFoundryModelRouter** | Dynamic multi-model routing ← you are here |
 
 ---
@@ -192,8 +201,7 @@ This repo is one of a growing set of production-ready reference implementations:
 ## Author
 
 **Praveen Kumar**
-Azure Solutions Architect & AI Engineer 
+Azure Solutions Architect & AI Engineer · Associate Consultant @ TCS
+[LinkedIn]([https://www.linkedin.com/in/praveen11singh](https://www.linkedin.com/in/praveen-kumar-b52a1a1a0/)) · [GitHub](https://github.com/praveen11singh) 
 
 ---
-
-MIT License — see [LICENSE](LICENSE) for details.
