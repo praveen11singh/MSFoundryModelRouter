@@ -192,8 +192,6 @@ This repo is one of a growing set of production-ready reference implementations:
 | [MSFoundryAgentImageInput](https://github.com/praveen11singh/MSFoundryAgentImageInput) | Multi-modal image input with agents |
 | [MSFoundryEvaluation](https://github.com/praveen11singh/MSFoundryEvaluation) | Agent evaluation with azure-ai-evaluation |
 | [MSFoundryRedTeam](https://github.com/praveen11singh/MSFoundryRedTeam) | Red team jailbreak probing & RAI evaluators |
-| [foundry-langchain](https://github.com/praveen11singh/foundry-langchain) | LangChain & LangGraph integration patterns |
-| [foundry-mcp-agent](https://github.com/praveen11singh/foundry-mcp-agent) | Model Context Protocol (MCP) agent implementation |
 | **MSFoundryModelRouter** | Dynamic multi-model routing ← you are here |
 
 ---
