@@ -14,11 +14,11 @@ client = OpenAI(
 
 # ── Demo prompts designed to trigger different models ─────────────────────────
 
-DEMO_PROMPTS = [
+PK_DEMO_PROMPTS = [
     {
         "label": "Simple factual",
         "system": "You are a helpful assistant.",
-        "user": "What is the capital of France?",
+        "user": "What is the capital of India?",
     },
     {
         "label": "Reasoning / coding",
@@ -65,7 +65,7 @@ DEMO_PROMPTS = [
 
 # ── Runner ────────────────────────────────────────────────────────────────────
 
-def run_demo(prompts: list[dict]) -> None:
+def pk_run_demo(prompts: list[dict]) -> None:
     print("=" * 64)
     print("  Microsoft Foundry — Model Router Multimodel Demo")
     print("=" * 64)
@@ -127,6 +127,6 @@ def run_demo(prompts: list[dict]) -> None:
 
 
 if __name__ == "__main__":
-    run_demo(DEMO_PROMPTS)
+    pk_run_demo(PK_DEMO_PROMPTS)
 
 
