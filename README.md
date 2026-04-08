@@ -299,7 +299,7 @@ This repo is one of a growing set of production-ready reference implementations 
 **Praveen Kumar**
 Azure Solutions Architect & AI Engineer · Associate Consultant @ Tata Consultancy Services
 
-[![LinkedIn]](https://www.linkedin.com/in/praveen11singh)
+[![LinkedIn]]([https://www.linkedin.com/in/praveen11singh](https://www.linkedin.com/in/praveen-kumar-b52a1a1a0/))
 [![GitHub]](https://github.com/praveen11singh)
 
 ---
