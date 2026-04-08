@@ -2,12 +2,6 @@
 
 > **Microsoft Foundry Open-Source Series · Intelligent Model Router**
 > Route prompts dynamically across multiple LLMs — by task complexity, cost, and capability — through a single Azure AI Foundry endpoint.
-
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)](https://www.python.org/)
-[![Azure AI Foundry](https://img.shields.io/badge/Azure%20AI-Foundry-0078D4?logo=microsoftazure)](https://azure.microsoft.com/en-us/products/ai-foundry)
-[![OpenAI SDK](https://img.shields.io/badge/OpenAI%20SDK-Compatible-412991?logo=openai)](https://pypi.org/project/openai/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-
 ---
 
 ## Overview
@@ -305,8 +299,8 @@ This repo is one of a growing set of production-ready reference implementations 
 **Praveen Kumar**
 Azure Solutions Architect & AI Engineer · Associate Consultant @ Tata Consultancy Services
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?logo=linkedin)](https://www.linkedin.com/in/praveen11singh)
-[![GitHub](https://img.shields.io/badge/GitHub-praveen11singh-181717?logo=github)](https://github.com/praveen11singh)
+[![LinkedIn]](https://www.linkedin.com/in/praveen11singh)
+[![GitHub]](https://github.com/praveen11singh)
 
 ---
 
